@@ -10,7 +10,7 @@ export type LoginData = {
 }
 export const loginUser = createAsyncThunk<IUserAuth, LoginData, { rejectValue: string }>(
     'auth/loginUser',
-    async ({username, password, expiresInMins = 1}, thunkAPI) => {
+    async ({username, password, expiresInMins = 30}, thunkAPI) => {
         try {
             const {data: userWithTokens} = await axiosInstance.post('/user/login', {username,password, expiresInMins})
             localStorage.setItem('user', JSON.stringify({ ...userWithTokens}));
